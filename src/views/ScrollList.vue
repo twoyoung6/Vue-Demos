@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "complexTable",
+  name: "ScrollList",
   data() {
     return {};
   },

@@ -24,5 +24,6 @@ vue 技术栈的 演示的一些 DEMO 超集。
     ├─router
     │
     └─views
-            ScrollList.vue // 中奖连续滚动列表
+      └─ ScrollList.vue // 中奖连续滚动列表
+      └─ KeyBoard.vue // 软键盘
 ```
