@@ -11,31 +11,32 @@ const requireComponent = require.context(
   /\.vue$/
 )
 let routes = []
-requireComponent.keys().forEach(element => {
+requireComponent.keys().forEach((element) => {
   let comp = element.split('/')
   let compName = comp[1].split('.')[0]
   // console.log(comp, compName)
   let route = {
     path: `/${compName.toLowerCase()}`,
     name: compName,
-    component: () => import(/* webpackChunkName: "home" */ /* webpackPrefetch: true */`views/${comp[1]}`),
+    component: () =>
+      import(
+        /* webpackChunkName: "home" */ /* webpackPrefetch: true */ `views/${comp[1]}`
+      ),
   }
   routes.push(route)
-});
+})
 
 Vue.use(VueRouter)
 
 routes.unshift({
   path: '/',
-  component: () => import(/* webpackChunkName: "home" */ /* webpackPrefetch: true */'../views/ScrollList.vue'),
   meta: {
-    title: '首页'
-  }
+    title: '首页',
+  },
 })
 
-console.log(routes)
 const router = new VueRouter({
-  routes
+  routes,
 })
 
 export default router
