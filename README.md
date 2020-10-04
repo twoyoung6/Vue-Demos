@@ -30,3 +30,10 @@ vue 技术栈的 演示的一些 DEMO 超集。
       └─ KeyBoard.vue // 软键盘
       └─ Maps.vue // 唤起第三方地图导航
 ```
+
+## 路由示例
+
+- http://localhost:8080/#/scrolllist
+- http://localhost:8080/#/keyboards
+
+路由 hash 就是 views 下的文件名小写
