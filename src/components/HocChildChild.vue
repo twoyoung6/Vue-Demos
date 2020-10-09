@@ -1,14 +1,15 @@
 <template>
   <div class="linec">
-    <p>—<Icon type="logo-octocat" />C孙子隔代组件—</p>
+    <p>—<van-icon name="shop" />C孙子隔代组件—</p>
     <p>coo:{{ coo }}</p>
-    <Input
-      search
-      enter-button
-      size="small"
-      prefix="ios-contact"
+    <van-search
+      v-model="val"
+      autofocus
+      show-action
+      shape="round"
+      left-icon="scan"
       placeholder="Enter something..."
-      @on-change="onChange"
+      @input="onChange"
     />
   </div>
 </template>
@@ -23,12 +24,13 @@ export default {
   },
   data() {
     return {
+      val: "",
       inheritAttrs: false,
     };
   },
   methods: {
     onChange() {
-      this.$emit("inputChange");
+      this.$emit("inputChange", this.val);
     },
   },
 };

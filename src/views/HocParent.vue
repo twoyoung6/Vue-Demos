@@ -13,7 +13,7 @@
         事件监听器。它可以通过 v-on="$listeners" 传入内部组件。
       </p>
     </div>
-    <p>———————<Icon type="logo-android" />A父组件———————</p>
+    <p>———————<van-icon name="live" />A父组件———————</p>
     <hoc-child :foo="foo" :coo="coo" v-on:inputChange="receiveChange">
     </hoc-child>
   </div>
@@ -26,14 +26,15 @@ export default {
   components: { HocChild },
   data() {
     return {
-      foo: "Hello, world",
-      coo: "Hello,rui",
+      foo: "Hello，world.",
+      coo: "Hello，twoyoung!",
     };
   },
   methods: {
     // 接收隔代组件（孙子组件）的事件传递
-    receiveChange() {
-      console.log("receiveChange---", this.coo, this.foo);
+    receiveChange(val) {
+      this.coo = val ? val : "Hello，twoyoung!";
+      console.log("receiveChange---", this.coo, this.foo, val);
     },
   },
 };

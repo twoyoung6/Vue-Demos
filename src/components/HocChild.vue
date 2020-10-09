@@ -1,6 +1,6 @@
 <template>
   <div class="lineb">
-    <p>—————<Icon type="ios-bowtie" />B子组件—————</p>
+    <p>—————<van-icon name="good-job" />B子组件—————</p>
     <p>foo：{{ $attrs.foo }}</p>
     <p>coo：{{ $attrs.coo }}</p>
     <hoc-child-child v-bind="$attrs" v-on="$listeners"></hoc-child-child>
