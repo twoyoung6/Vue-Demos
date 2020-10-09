@@ -15,6 +15,8 @@ vue 技术栈的 演示的一些 DEMO 超集。
 │  vue.config.js
 ├─public
 ├─components // 子组件文件夹
+├─components
+    │  DestinationMap.vue // H5唤起第三方地图导航组件
 └─src
     │  App.vue
     │  main.js
@@ -28,4 +30,12 @@ vue 技术栈的 演示的一些 DEMO 超集。
       └─ ScrollList.vue // 中奖连续滚动列表
       └─ KeyBoard.vue // 软键盘
       └─ HocParent.vue // 演示 $attrs、$listeners 传参
+      └─ Maps.vue // 唤起第三方地图导航
 ```
+
+## 路由示例
+
+- http://localhost:8080/#/scrolllist
+- http://localhost:8080/#/keyboards
+
+路由 hash 就是 views 下的文件名小写
