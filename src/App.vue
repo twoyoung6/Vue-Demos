@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss">
 #app {
+  font-size: 30px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,7 +24,7 @@ export default {
   min-height: 100vh;
   box-sizing: border-box;
   img {
-    width: 300px;
+    width: 200px;
   }
 }
 </style>

@@ -14,6 +14,7 @@ vue 技术栈的 演示的一些 DEMO 超集。
 │  tree.txt
 │  vue.config.js
 ├─public
+├─components // 子组件文件夹
 └─src
     │  App.vue
     │  main.js
@@ -26,4 +27,5 @@ vue 技术栈的 演示的一些 DEMO 超集。
     └─views
       └─ ScrollList.vue // 中奖连续滚动列表
       └─ KeyBoard.vue // 软键盘
+      └─ HocParent.vue // 演示 $attrs、$listeners 传参
 ```
