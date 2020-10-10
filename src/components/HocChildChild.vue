@@ -1,7 +1,7 @@
 <template>
   <div class="linec">
     <p>—<van-icon name="shop" />C孙子隔代组件—</p>
-    <p>coo:{{ coo }}</p>
+    <p>jojo:{{ jojo }}</p>
     <van-search
       v-model="val"
       autofocus
@@ -17,15 +17,15 @@
 export default {
   name: "childDomChild",
   props: {
-    coo: {
+    jojo: {
       type: String,
       default: "",
     },
   },
+  inheritAttrs: false,
   data() {
     return {
       val: "",
-      inheritAttrs: false,
     };
   },
   methods: {

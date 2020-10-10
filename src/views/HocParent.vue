@@ -1,20 +1,26 @@
 <template>
   <div class="linea">
     <div class="docs">
-      <p>$attrs/$listeners 适用于 隔代组件通信</p>
+      <p><b>隔代组件通信</b></p>
       <p>
-        1）$attrs：包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 ( class
-        和 style 除外 )。当一个组件没有声明任何 prop
+        1）<strong>$attrs：</strong>包含了父作用域中不被 prop 所识别 (且获取)
+        的特性绑定 ( class 和 style 除外 )。当一个组件没有声明任何 prop
         时，这里会包含所有父作用域的绑定 ( class 和 style 除外 )，并且可以通过
         v-bind="$attrs" 传入内部组件。通常配合 inheritAttrs 选项一起使用。
       </p>
       <p>
-        2）$listeners：包含了父作用域中的 (不含 .native 修饰器的) v-on
-        事件监听器。它可以通过 v-on="$listeners" 传入内部组件。
+        2）<strong>$listeners：</strong>包含了父作用域中的 (不含 .native
+        修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件；
+      </p>
+      <p>
+        3）<strong>inheritAttrs：</strong>默认值true,继承所有的父组件属性（除props的特定绑定）作为普通的HTML特性应用在子组件的根元素上，如果你不希望组件的根元素继承特性设置inheritAttrs:
+        false,但是class属性会继承。
       </p>
     </div>
-    <p>———————<van-icon name="live" />A父组件———————</p>
-    <hoc-child :foo="foo" :coo="coo" v-on:inputChange="receiveChange">
+    <p>———————<van-icon name="live" />A根组件———————</p>
+    <p>papi：{{ papi }}</p>
+    <p>jojo：{{ jojo }}</p>
+    <hoc-child :papi="papi" :jojo="jojo" v-on:inputChange="receiveChange">
     </hoc-child>
   </div>
 </template>
@@ -26,15 +32,15 @@ export default {
   components: { HocChild },
   data() {
     return {
-      foo: "Hello，world.",
-      coo: "Hello，twoyoung!",
+      papi: "Hello，world.",
+      jojo: "Hello，twoyoung!",
     };
   },
   methods: {
     // 接收隔代组件（孙子组件）的事件传递
     receiveChange(val) {
-      this.coo = val ? val : "Hello，twoyoung!";
-      console.log("receiveChange---", this.coo, this.foo, val);
+      this.jojo = val ? val : "Hello，twoyoung!";
+      console.log("receiveChange---", this.jojo, this.papi, val);
     },
   },
 };
@@ -46,6 +52,11 @@ export default {
     text-align: left;
     padding: 0;
     color: rgb(87, 85, 85);
+    letter-spacing: 2px;
+    font-size: 28px;
+  }
+  strong {
+    color: #56d13d;
   }
 }
 .linea {
