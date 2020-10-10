@@ -95,13 +95,12 @@ export default {
       // 5.0 执行跳转
       window.location.href = url;
       // 6.0 H5 方式检测是否安装对应导航应用
-
-      let timer = setTimeout(() => {
+      let timer = setInterval(() => {
         if (!(document.hidden || document.webkitHidden)) {
           this.$toast("请先安装该软件");
         }
         clearTimeout(timer);
-      }, 300);
+      }, 1000);
     },
     // 导航方式统一处理函数
     guideTypeCope(appName, type) {
