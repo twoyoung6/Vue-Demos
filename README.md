@@ -31,6 +31,7 @@ vue 技术栈的 演示的一些 DEMO 超集。首页菜单导航及路由注册
       └─ KeyBoard.vue // 软键盘
       └─ HocParent.vue // 演示 $attrs、$listeners 传参
       └─ Maps.vue // 唤起第三方地图导航
+      └─ DocPreview.vue // PDF 手机端在线预览
 ```
 
 ## 路由示例

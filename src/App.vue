@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/images/logo.png" />
-    <van-grid :border="false" clickable>
+    <van-grid clickable>
       <van-grid-item
         icon="smile"
         :text="item.name"
@@ -33,6 +33,8 @@ export default {
 
 <style lang="scss">
 #app {
+  overflow-x: hidden;
+  box-sizing: border-box;
   font-size: 30px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
