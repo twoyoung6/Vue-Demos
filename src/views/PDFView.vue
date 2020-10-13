@@ -78,8 +78,5 @@ export default {
 
 <style lang="scss" scoped>
 .view {
-  /deep/ .van-loading {
-    margin-top: 15vh;
-  }
 }
 </style>
