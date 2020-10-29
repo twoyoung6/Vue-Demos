@@ -6,6 +6,8 @@ import 'vant/lib/index.css'
 import '@/assets/css/index.scss'
 require('lib-flexible')
 Vue.config.productionTip = false
+import PdfView from "w-pdf-preview";
+Vue.use(PdfView)
 
 Vue.use(Vant)
 

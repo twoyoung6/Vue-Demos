@@ -1,5 +1,6 @@
 <template>
-  <div class="view">
+  <!-- 工程内使用 -->
+  <!-- <div class="view">
     <div class="pdf">
       <pdf
         ref="pdf"
@@ -10,14 +11,18 @@
         @page-loaded="pageLoaded($event)"
       ></pdf>
     </div>
-  </div>
+  </div> -->
+  <!-- npm 插件引入 -->
+  <PdfView
+    url="https://tencentcloud-1251529838.cos.ap-beijing.myqcloud.com/%E3%80%90%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88_%E9%95%BF%E6%B2%99%E3%80%91Alyson%204%E5%B9%B4.pdf"
+  ></PdfView>
 </template>
 
 <script>
-import pdf from "vue-pdf";
+// import pdf from "vue-pdf";
 export default {
-  name: "PDFView",
-  components: { pdf },
+  name: "PDFPreView",
+  // components: { pdf },
   data() {
     return {
       toast: null,
@@ -71,7 +76,7 @@ export default {
     },
   },
   mounted() {
-    this.getNumPages();
+    // this.getNumPages();
   },
 };
 </script>
