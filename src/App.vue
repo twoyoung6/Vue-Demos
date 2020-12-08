@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/images/logo.png" />
     <van-grid clickable>
       <van-grid-item
         icon="smile"
@@ -45,6 +44,9 @@ export default {
   border: 5px dashed #db3737;
   min-height: 100vh;
   box-sizing: border-box;
+  /deep/ .van-grid-item__content--center {
+    justify-content: flex-start;
+  }
   img {
     width: 200px;
   }

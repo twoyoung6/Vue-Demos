@@ -12,10 +12,11 @@
     "lib-flexible": "^0.3.2",
     "vant": "^2.10.9",
     "vue": "^2.6.11",
+    "vue-cropper": "^0.5.5",
     "vue-pdf": "^4.1.0",
     "vue-router": "^3.4.4",
     "vue-virtual-keyboard": "^1.2.0",
-    "w-pdf-preview": "^1.0.1"
+    "w-pdf-preview": "^1.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
