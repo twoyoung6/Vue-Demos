@@ -152,7 +152,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .map {
-  /deep/ .van-popup {
+  >>> .van-popup {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

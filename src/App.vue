@@ -44,7 +44,7 @@ export default {
   border: 5px dashed #db3737;
   min-height: 100vh;
   box-sizing: border-box;
-  /deep/ .van-grid-item__content--center {
+  >>> .van-grid-item__content--center {
     justify-content: flex-start;
   }
   img {
