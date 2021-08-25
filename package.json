@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@antv/data-set": "^0.11.8",
+    "@antv/g2": "^4.1.25",
     "@antv/l7": "^2.5.8",
     "@antv/l7-district": "^2.3.11",
     "@antv/l7-maps": "^2.5.8",

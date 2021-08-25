@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div id="map" />
 </template>
 
 <script>
@@ -195,12 +195,11 @@ export default {
           center: [116.2825, 39.9],
           pitch: 0, // 倾斜角度
           style: "blank", // 地图主题
-          zoom: 1,
+          zoom: 3,
           minZoom: 1,
           maxZoom: 6,
           visible: true,
           controlsVisible: true,
-          token: "062ab1e31804a3859a9da04372d183dc",
         }),
       });
 
@@ -214,6 +213,17 @@ export default {
           cityStroke: "#EBCCB4",
           cityStrokeWidth: 1,
           chinaNationalStroke: "#ff0010",
+          label: {
+            enable: true,
+            field: "name",
+            size: 10,
+            opacity: 1,
+            color: "#000",
+            stroke: "#fff",
+            strokeWidth: 1.2,
+            strokeOpacity: 1,
+            textAllowOverlap: false,
+          },
           fill: {
             color: {
               visible: true,
@@ -229,17 +239,11 @@ export default {
               return `<div>${props.NAME_CHN}</div><div>已确诊: ${props.value}</div>`;
             },
           },
-          label: {
-            enable: true,
-            field: "name",
-            size: 10,
-            opacity: 1,
-            color: "#000",
-            stroke: "#fff",
-            strokeWidth: 1.2,
-            strokeOpacity: 1,
-            textAllowOverlap: false,
-          },
+          // animate: {
+          //   leave: {
+          //     animation: "fade-out",
+          //   },
+          // },
         });
       });
       scene.on("click", (ev) => {
