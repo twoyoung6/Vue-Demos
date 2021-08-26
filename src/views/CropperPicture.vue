@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper">
-    <div class="info-item">
-      <div>
-        <img :src="headImg" alt="头像" />
-      </div>
+    <div class="bg">
+      <h2>图片选择，压缩，上传</h2>
+      <h6>
+        File 对象 / base64 / Array Buffer / Blob / BinaryString 间相互转化
+      </h6>
     </div>
     <div class="info-item">
       <div class="btn-group">
@@ -86,6 +87,15 @@
           </div>
         </div>
       </div>
+      <!-- 图片其他相互转化的演示 -->
+      <div class="bg"><h2>图片其他相互转化的演示</h2></div>
+      <input type="button" class="btn" value="url2Image" @click="toClick(1)" />
+      <input
+        type="button"
+        class="btn"
+        value="image2Canvas"
+        @click="toClick(2)"
+      />
     </div>
   </div>
 </template>
@@ -101,9 +111,11 @@ export default {
   data() {
     return {
       headImg: require("../assets/images/logo.png"),
+      canvasImg: "",
       //剪切图片上传
       crap: false,
       previews: {},
+      modelSrc: "",
       option: {
         img: "",
         outputSize: 1, //剪切后的图片质量（0.1-1）
@@ -197,23 +209,57 @@ export default {
       }
       var reader = new FileReader();
       reader.onload = (e) => {
+        // 实例属性  reader.result  即为文件内容
         let data;
-        if (typeof e.target.result === "object") {
-          // 把Array Buffer转化为blob 如果是base64不需要
-          data = window.URL.createObjectURL(new Blob([e.target.result]));
+        // 本地直接展示的转化
+        if (typeof reader.result === "object") {
+          console.log("reader result----1111", reader.result);
+          // 把 Array Buffer 转化为 blob 如果是 base64 不需要
+          data = window.URL.createObjectURL(new Blob([reader.result]));
         } else {
-          data = e.target.result;
+          console.log("222222");
+          console.log("reader result----2222", reader.result);
+          data = reader.result;
         }
-        if (num === 1) {
-          _this.option.img = data;
-        } else if (num === 2) {
-          _this.example2.img = data;
-        }
+        console.log("data----", data);
+        this.option.img = data;
       };
-      // 转化为base64
-      // reader.readAsDataURL(file)
-      // 转化为blob
+      // 1.0 转化为 base64  data:image/jpeg;base64,
+      // reader.readAsDataURL(file);
+      // 2.0 转化为 blob   blob:http://172.16.124.70:8080/aba3035c-c090-48ce-9ed7-028e57c5e8cf
       reader.readAsArrayBuffer(file);
+      // 3.0 转化成二进制   看上去像乱码字符串(生产中不推荐使用，该方法已从 FileAPI 标准移除)
+      // reader.readAsBinaryString(file);
+    },
+    // 服务器图片URL 转成 image 标签
+    url2Image(url, callback) {
+      var image = new Image();
+      image.src = url;
+      image.onload = function () {
+        callback(image);
+      };
+    },
+    toClick(id) {
+      this.url2Image(
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4188280155,548323661&fm=26&gp=0.jpg",
+        (img) => {
+          console.log("img---", img);
+          if (id == 2) {
+            let canvasImg = this.image2Canvas(img); // 生成canvas
+            console.log("canvasImg---", canvasImg);
+            this.canvasImg = `${canvasImg}`;
+          }
+        }
+      );
+    },
+    // 图片转Canvas(这是图片压缩的第一步)
+    image2Canvas(image) {
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      return canvas;
     },
     imgLoad(msg) {
       console.log("imgLoad");
@@ -227,11 +273,36 @@ export default {
 .wrapper {
   display: flex;
   flex-direction: column;
+  padding: 40px 0;
+  .btn {
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    background-color: #0f9960;
+    margin: 0 10px 0;
+  }
+}
+.bg {
+  background: #ffe;
+  padding: 30px 0px;
+  h2 {
+    margin: 0;
+    padding: 0 0.9375rem;
+    font-size: 30px;
+    color: indianred;
+  }
+  h6 {
+    margin: 0;
+    padding: 10px 0.9375rem;
+    font-size: 28px;
+    color: indigo;
+  }
 }
 .info-item {
   margin-top: 15px;
   font-size: 30px;
   color: #fff;
+
   .btn-group {
     display: flex;
     justify-content: space-around;
@@ -239,11 +310,11 @@ export default {
     padding: 10px 30px;
     box-sizing: border-box;
     #selectInput {
-      width: 200px;
+      min-width: 200px;
       flex: 0 0 100px;
       border: none;
       outline: none;
-      padding: 12px 20px;
+      padding: 15px 20px;
       color: #fff;
     }
     #uploadInput {
