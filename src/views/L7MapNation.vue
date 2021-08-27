@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { Scene } from "@antv/l7";
+import { Scene, Popup } from "@antv/l7";
 import { CountryLayer } from "@antv/l7-district";
 import { Mapbox } from "@antv/l7-maps";
 export default {
@@ -12,9 +12,9 @@ export default {
       const colors = [
         "rgb(254,237,222)",
         "rgb(253,190,133)",
-        "rgb(253,141,60)",
-        "rgb(230,85,13)",
-        "rgb(166,54,3)",
+        "rgb(203,191,60)",
+        "rgb(210,85,13)",
+        "rgb(164,5,0)",
       ];
       const ProvinceData = [
         {
@@ -204,7 +204,7 @@ export default {
       });
 
       scene.on("loaded", () => {
-        new CountryLayer(scene, {
+        const layer = new CountryLayer(scene, {
           data: ProvinceData,
           joinBy: ["NAME_CHN", "name"],
           depth: 1,
@@ -230,10 +230,10 @@ export default {
               field: "value",
               values: colors,
             },
-            activeColor: "#00eeb7",
+            activeColor: "#ff3eee",
           },
           popup: {
-            enable: true,
+            enable: false,
             triggerEvent: "touchstart",
             Html: (props) => {
               return `<div>${props.NAME_CHN}</div><div>已确诊: ${props.value}</div>`;
@@ -245,10 +245,19 @@ export default {
           //   },
           // },
         });
+        layer.on("click", (ev) => {
+          console.log("ev---", ev);
+          let valueObj = ProvinceData.find((val) => {
+            return val.code == ev.feature.properties.adcode;
+          });
+          console.log("valueObj---", valueObj);
+          const popup = new Popup();
+          var html = `<p>${valueObj.name} </p><p>数值: ${valueObj.value}</p>`;
+          popup.setLnglat([ev.lngLat.lng, ev.lngLat.lat]);
+          popup.setHTML(html);
+          scene.addPopup(popup);
+        }); // 鼠标左键点击事件
       });
-      scene.on("click", (ev) => {
-        console.log("ev---", ev.target);
-      }); // 鼠标左键点击事件
     },
   },
   mounted() {
@@ -261,5 +270,29 @@ export default {
 #map {
   height: 60vh;
   position: relative;
+  ::v-deep .l7-popup-content {
+    padding: 0 30px;
+    background: #000;
+    color: #fff;
+    .l7-popup-close-button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border: 0;
+      padding: 0;
+      font-size: 20px;
+      line-height: 20px;
+      border-radius: 0 3px 0 0;
+      cursor: pointer;
+      background-color: transparent;
+    }
+    p {
+      padding: 0;
+      margin: 15px 0;
+    }
+  }
+  ::v-deep .l7-popup-tip {
+    border-top-color: rgb(83, 82, 82);
+  }
 }
 </style>
