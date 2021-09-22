@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
   overflow-x: hidden;
   box-sizing: border-box;
@@ -44,14 +44,17 @@ export default {
   border: 5px dashed #db3737;
   min-height: 100vh;
   box-sizing: border-box;
-  >>> .van-grid-item__content--center {
+  ::v-deep .van-grid {
+    align-items: flex-start;
+    .van-grid-item__icon {
+      color: #ff5722;
+    }
+  }
+  ::v-deep .van-grid-item__content--center {
     justify-content: flex-start;
   }
   img {
     width: 200px;
-  }
-  .van-grid-item__icon {
-    color: #ff5722;
   }
 }
 </style>

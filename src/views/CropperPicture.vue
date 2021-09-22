@@ -21,6 +21,17 @@
           value="上传头像"
           @click="finish('blob')"
         />
+        <input
+          type="button"
+          id="uploadInput"
+          value="fileSaver.js下载"
+          @click="downLocal('blob')"
+        /><input
+          type="button"
+          id="uploadInput"
+          value="picker 下载"
+          @click="pickerDown('blob')"
+        />
       </div>
       <div class="cropper-content">
         <div class="cropper">
@@ -101,7 +112,10 @@
 </template>
 
 <script>
-import { VueCropper } from "vue-cropper";
+import { VueCropper } from "vue-cropper"; // 图片裁切插件
+import { saveAs } from "file-saver"; // 常用的下载插件
+import { fileSave } from "browser-fs-access"; // 另一个下载插件
+// import { saveFile } from "../common/utils"; // 自定义 picker 下载
 
 export default {
   name: "CropperPicture",
@@ -177,6 +191,30 @@ export default {
       console.log("realTime");
       this.previews = data;
     },
+    // showSaveFilePicker API 下载(允许用户选择文件的下载目录、选择文件的保存格式和更改存储的文件名称)
+    pickerDown() {
+      // 配置
+      const options = {
+        fileName: "picker.png",
+        extensions: "",
+        // 默认目录
+        startIn: "",
+        // 通过指定ID，用户代理可以记住不同ID的不同目录。
+        id: "projects",
+        // 在文件选择器中包含不应用任何过滤器的选项，默认为“假”。
+        excludeAcceptAllOption: false,
+      };
+      this.$refs.cropper.getCropBlob(async (blob) => {
+        // await saveFile(blob, "selfPicker.png");
+        await fileSave(blob, options);
+      });
+    },
+    // FileSaver.js 实现文件下载
+    downLocal() {
+      this.$refs.cropper.getCropBlob((data) => {
+        saveAs(data, "save.png");
+      });
+    },
     //下载图片
     down(type) {
       console.log("down");
@@ -196,6 +234,7 @@ export default {
         });
       }
     },
+
     //选择本地图片
     uploadImg(e, num) {
       console.log("uploadImg");
@@ -305,10 +344,11 @@ export default {
 
   .btn-group {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
     box-sizing: border-box;
+    flex-wrap: wrap;
     #selectInput {
       min-width: 200px;
       flex: 0 0 100px;
@@ -360,7 +400,7 @@ export default {
     display: -webkit-flex;
     justify-content: center;
     -webkit-justify-content: center;
-    .preview {
+    ::v-deep .preview {
       overflow: hidden;
       border-radius: 50%;
       border: 1px solid #cccccc;
