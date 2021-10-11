@@ -12,7 +12,7 @@
       </div>
     </div>
     <van-button type="danger" class="share" @click="share">分享海报</van-button>
-    <img class="posterImg" :src="posterImg" alt="" />
+    <img class="posterImg" :src="posterImg" alt="" v-show="posterImg" />
   </div>
 </template>
 
@@ -36,10 +36,11 @@ export default {
       const h = parseInt(window.getComputedStyle(domObj).height);
       // 创建画布
       const canvas2 = document.createElement("canvas");
+      const context = canvas2.getContext("2d");
+      //将canvas画布放大2倍，然后盛放在较小的容器内，就显得不模糊了
+      context.scale(2, 2);
       canvas2.width = w * 2;
       canvas2.height = h * 2;
-      const context = canvas2.getContext("2d");
-      context.scale(2, 2);
       html2canvas(domObj, {
         canvas: canvas2,
         useCORS: true,
@@ -91,6 +92,7 @@ export default {
     width: 100%;
     height: 987px;
     object-fit: cover;
+    border: none;
   }
 }
 </style>
