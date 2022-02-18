@@ -1,5 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css'
+const originalPush = VueRouter.prototype.push
+
+//解决报错信息：NavigationDuplicated: Avoided redundant navigation to current location
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 // 批量获取组件注册
 const requireComponent = require.context(
@@ -13,18 +21,26 @@ const requireComponent = require.context(
 let routes = []
 requireComponent.keys().forEach((element) => {
   let comp = element.split('/')
+  let component = () =>
+    import(
+        /* webpackChunkName: "home" */ /* webpackPrefetch: true */ `views/${comp[1]}`
+    )
   let compName = comp[1].split('.')[0]
-  // console.log(comp, compName)
-  let route = {
+  let isIfame = compName == 'iFrame' ? component : false
+  let route = isIfame ? {
     path: `/${compName.toLowerCase()}`,
     name: compName,
-    component: () =>
-      import(
-        /* webpackChunkName: "home" */ /* webpackPrefetch: true */ `views/${comp[1]}`
-      ),
+    iframeComponent: isIfame,
+  } : {
+    path: `/${compName.toLowerCase()}`,
+    name: compName,
+    component: component
   }
+
   routes.push(route)
 })
+console.log(`🍉 ~ requireComponent.keys ~ routes`, routes)
+
 
 Vue.use(VueRouter)
 
@@ -38,5 +54,14 @@ routes.unshift({
 const router = new VueRouter({
   routes,
 })
+
+router.beforeEach(async (to, from, next) => {
+  NProgress.start();
+  next()
+});
+
+router.afterEach((to) => {
+  NProgress.done();
+});
 
 export default router

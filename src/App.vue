@@ -7,30 +7,64 @@
           :text="item.name"
           v-for="(item, index) in routes"
           :key="index"
-          :to="item.path"
+          @click="click(item)"
         />
       </van-grid>
-      <router-view></router-view>
+      <keep-alive><router-view /></keep-alive>
+      <!-- iframe页 -->
+      <component
+        v-for="item in hasOpenComponentsArr"
+        :key="item.name"
+        :is="item.name"
+        v-show="$route.path === item.path"
+      />
     </template>
-    <div class="statusImg" v-if="!onLine">
-      <img :src="icon" alt="500" />
-      <van-button plain size="small" @click="refresh">刷新重新加载</van-button>
-    </div>
+    <!-- 网络状态监听 -->
+    <Net v-if="!onLine" />
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import Net from "./components/Net";
 export default {
   name: "App",
-  components: {},
+  components: { Net },
   data() {
     return {
+      componentsArr: [], // 含有iframe的页面
+      activeTab: "/", // 当前激活的 router path
       routes: [],
       onLine: navigator.onLine, // 默认网络在线状态
       icon: require("assets/images/500.gif"),
     };
   },
+  computed: {
+    // 实现懒加载，只渲染已经打开过（hasOpen:true）的iframe页
+    hasOpenComponentsArr() {
+      return this.componentsArr.filter((item) => item.hasOpen);
+    },
+  },
+  watch: {
+    $route() {
+      // 判断当前路由是否iframe页
+      this.isOpenIframePage();
+    },
+  },
   methods: {
+    // 根据当前路由设置hasOpen
+    isOpenIframePage() {
+      const target = this.componentsArr.find((item) => {
+        return item.path === this.$route.path;
+      });
+      if (target && !target.hasOpen) {
+        target.hasOpen = true;
+      }
+    },
+    click(obj) {
+      this.activeTab = obj.name;
+      this.$router.push(obj.path);
+    },
     // 注册网络监听事件
     regOnline() {
       window.addEventListener("online", this.updateOnlineStatus);
@@ -47,6 +81,28 @@ export default {
     },
   },
   mounted() {
+    const routes = this.$router.options.routes;
+    let iframeArr = [];
+    routes.map((it) => {
+      if (it.iframeComponent) {
+        const name = it.name || it.path.replace("/", "");
+
+        iframeArr.push({
+          name: name,
+          path: it.path,
+          hasOpen: false,
+          component: it.iframeComponent,
+        });
+      }
+    });
+    iframeArr.forEach((item) => {
+      Vue.component(item.name, item.component);
+    });
+    this.componentsArr = iframeArr;
+    console.log(`🍉 ~ mounted ~ componentsArr`, this.componentsArr);
+
+    var mobile = require("is-mobile");
+    console.log("是否在移动端运行?----", mobile());
     this.regOnline();
     // 根据注册路由自动生成首页菜单
     this.routes = [].concat(this.$router.options.routes);
@@ -86,13 +142,8 @@ export default {
   img {
     width: 200px;
   }
-  .statusImg {
-    img {
-      width: 100vw;
-      object-fit: cover;
-      height: auto;
-      margin-top: 30%;
-    }
-  }
+}
+#nprogress .bar {
+  background: #ff5722 !important; //自定义颜色
 }
 </style>
