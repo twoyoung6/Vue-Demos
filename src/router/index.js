@@ -26,7 +26,7 @@ requireComponent.keys().forEach((element) => {
         /* webpackChunkName: "home" */ /* webpackPrefetch: true */ `views/${comp[1]}`
     )
   let compName = comp[1].split('.')[0]
-  let isIfame = compName == 'iFrame' ? component : false
+  let isIfame = compName.includes('iFrame') ? component : false
   let route = isIfame ? {
     path: `/${compName.toLowerCase()}`,
     name: compName,

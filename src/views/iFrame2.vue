@@ -3,7 +3,7 @@
     <iframe
       id="forum"
       class="iframe"
-      src="https://wappass.baidu.com/passport/#/reg"
+      src="https://passport.csdn.net/signwap?code=one"
       frameborder="0"
       width="100%"
       height="auto"
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "Iframe",
+  name: "Iframe2",
 };
 </script>
 
