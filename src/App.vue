@@ -81,6 +81,25 @@ export default {
     },
   },
   mounted() {
+    // 监听页面是刷新了还是关闭了
+    let _beforeUnload_time = 0,
+      _unload_time = 0;
+
+    window.addEventListener("beforeunload", () => {
+      console.log("关闭/刷新前-----");
+      _beforeUnload_time = new Date().getTime();
+    });
+
+    window.addEventListener("unload", () => {
+      console.log("关闭/刷新后-----");
+      _unload_time = new Date().getTime();
+
+      if (_unload_time - _beforeUnload_time > 4) {
+        //业务代码
+        localStorage.setItem("page_state", "refresh");
+      }
+    });
+
     const routes = this.$router.options.routes;
     let iframeArr = [];
     routes.map((it) => {

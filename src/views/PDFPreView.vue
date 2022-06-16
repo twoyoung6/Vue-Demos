@@ -1,6 +1,6 @@
 <template>
   <!-- 工程内使用 -->
-  <!-- <div class="view">
+  <div class="view">
     <div class="pdf">
       <pdf
         ref="pdf"
@@ -10,19 +10,30 @@
         :page="index"
         @page-loaded="pageLoaded($event)"
       ></pdf>
+      <pdfs
+        v-for="i in numPages"
+        :key="i"
+        :src="pdfSrc"
+        :page="i"
+        frameborder="0"
+      ></pdfs>
     </div>
-  </div> -->
+  </div>
   <!-- npm 插件引入 -->
-  <PdfView
-    url="https://tencentcloud-1251529838.cos.ap-beijing.myqcloud.com/%E3%80%90%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88_%E9%95%BF%E6%B2%99%E3%80%91Alyson%204%E5%B9%B4.pdf"
-  ></PdfView>
+  <!-- <PdfView
+    url="https://zs.sjz.gov.cn/fileService/housebucket/1655341931126.pdf"
+  ></PdfView> -->
 </template>
 
 <script>
-// import pdf from "vue-pdf";
+import pdf from "vue-pdf";
+
+import pdfs from "vue-pdf-signature"; // 中文PDF加载空白引入依赖
+import CMapReaderFactory from "vue-pdf-signature/src/CMapReaderFactory.js";
+
 export default {
   name: "PDFPreView",
-  // components: { pdf },
+  components: { pdf, pdfs },
   data() {
     return {
       toast: null,
@@ -31,8 +42,8 @@ export default {
       loadMessage: "文档加载中...",
       numPages: null, // pdf 总页数
       curPageNum: 0,
-      pdfUrl:
-        "http://qgqa73lvg.hn-bkt.clouddn.com/JS%E6%A0%87%E5%87%86%E8%83%BD%E5%8A%9B%E8%AF%B4%E6%98%8E.pdf",
+      pdfUrl: "./staic/1655341931126.pdf",
+      pdfSrc: "",
     };
   },
   watch: {
@@ -45,6 +56,7 @@ export default {
     },
   },
   methods: {
+    // vue-pdf 使用
     // 某一个 pdf 加载成功回调
     pageLoaded(num) {
       // num 为 当前加载完的页面数
@@ -74,9 +86,24 @@ export default {
           this.hasLoaded = false;
         });
     },
+
+    // vue-pdf-signature 使用
+    getNumPages2() {
+      // 1.解决中文PDF加载空白并报错：
+      this.pdfSrc = pdfs.createLoadingTask({
+        url: this.pdfUrl,
+        CMapReaderFactory,
+      });
+
+      // 2.解决PDF存在分页，进行分页加载
+      pdfs.createLoadingTask(this.pdfUrl).promise.then((pdf) => {
+        this.numPages = pdf.numPages;
+      });
+    },
   },
   mounted() {
-    // this.getNumPages();
+    this.getNumPages();
+    this.getNumPages2(); // vue-pdf-signature 使用
   },
 };
 </script>
