@@ -1,4 +1,5 @@
 const path = require('path')
+const vConsolePlugin = require('vconsole-webpack-plugin')
 const resolve = dir => path.join(__dirname, dir)
 module.exports = {
   lintOnSave: false,
@@ -7,6 +8,14 @@ module.exports = {
       config.performance = {
         hints: false
       }
+    const debug = process.env.NODE_ENV !== 'production'
+    let pluginsDev = [
+      new vConsolePlugin({
+        filter: [],
+        enable: debug
+      })
+    ]
+    config.plugins = [...config.plugins, ...pluginsDev]
   },
 
   chainWebpack: config => {
