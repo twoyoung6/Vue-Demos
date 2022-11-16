@@ -116,6 +116,7 @@ import { VueCropper } from "vue-cropper"; // 图片裁切插件
 import { saveAs } from "file-saver"; // 常用的下载插件
 import { fileSave } from "browser-fs-access"; // 另一个下载插件
 // import { saveFile } from "../common/utils"; // 自定义 picker 下载
+import localforage from "localforage";
 
 export default {
   name: "CropperPicture",
@@ -150,6 +151,11 @@ export default {
     };
   },
   methods: {
+    // localforage 存储/获取复杂数据、二进制流
+    localforageSet() {
+      localforage.setItem("globalData", [this.option, this.option]);
+      localforage.setItem("pic", require("../assets/images/qrCode.png"));
+    },
     //放大/缩小
     changeScale(num) {
       console.log("changeScale");
@@ -304,6 +310,9 @@ export default {
       console.log("imgLoad");
       console.log(msg);
     },
+  },
+  activated() {
+    this.localforageSet();
   },
 };
 </script>
