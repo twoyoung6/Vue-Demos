@@ -2,14 +2,14 @@
   <!-- 工程内使用 -->
   <div class="view">
     <div class="pdf">
-      <pdf
+      <!-- <pdf
         ref="pdf"
         :src="pdfUrl"
         v-for="index in numPages"
         :key="index"
         :page="index"
         @page-loaded="pageLoaded($event)"
-      ></pdf>
+      ></pdf> -->
       <pdfs
         v-for="i in numPages"
         :key="i"
@@ -102,7 +102,7 @@ export default {
     },
   },
   mounted() {
-    this.getNumPages();
+    // this.getNumPages();
     this.getNumPages2(); // vue-pdf-signature 使用
   },
 };

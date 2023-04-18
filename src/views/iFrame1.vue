@@ -3,11 +3,12 @@
     <iframe
       id="forum"
       class="iframe"
-      src="http://172.16.124.174:8021/#/?authCode=5f2923715f062820e5dd3ac11652855619_5101"
+      src="https://testapps.eshiyun.info/facilities-web/#/list-distance/zhangjiajie/908"
       frameborder="0"
       width="100%"
       height="auto"
       scrolling="no"
+      allow="geolocation"
     />
   </div>
 </template>

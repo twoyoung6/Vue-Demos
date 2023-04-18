@@ -3,7 +3,6 @@
     <template v-if="onLine">
       <van-grid clickable>
         <van-grid-item
-          icon="smile"
           :text="item.name"
           v-for="(item, index) in routes"
           :key="index"
