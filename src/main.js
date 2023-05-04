@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 import PdfView from "w-pdf-preview";
 Vue.use(PdfView)
 
+import Print from 'vue-print-nb'
+Vue.use(Print)
 Vue.use(Vant)
 
 new Vue({

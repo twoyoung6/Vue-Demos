@@ -29,6 +29,7 @@
     "vue-esign": "^1.0.5",
     "vue-pdf": "^4.1.0",
     "vue-pdf-signature": "^4.2.7",
+    "vue-print-nb": "^1.7.5",
     "vue-router": "^3.4.4",
     "vue-virtual-keyboard": "^1.2.0",
     "w-pdf-preview": "^1.0.2",

@@ -6758,6 +6758,11 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz"
   "version" "4.0.6"
 
+"immediate@~3.0.5":
+  "integrity" "sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ=="
+  "resolved" "https://registry.npmmirror.com/immediate/-/immediate-3.0.6.tgz"
+  "version" "3.0.6"
+
 "import-cwd@^2.0.0":
   "integrity" "sha1-qmzzbnInYShcs3HsZRn1PiQ1sKk="
   "resolved" "https://registry.npmjs.org/import-cwd/-/import-cwd-2.1.0.tgz"
@@ -7484,6 +7489,13 @@
   "resolved" "https://registry.npmjs.org/lib-flexible/-/lib-flexible-0.3.2.tgz"
   "version" "0.3.2"
 
+"lie@3.1.1":
+  "integrity" "sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw=="
+  "resolved" "https://registry.npmmirror.com/lie/-/lie-3.1.1.tgz"
+  "version" "3.1.1"
+  dependencies:
+    "immediate" "~3.0.5"
+
 "lineclip@^1.1.5":
   "integrity" "sha1-K/JgZ9lDVP6r+R5CdoI221YW/RM="
   "resolved" "https://registry.npm.taobao.org/lineclip/download/lineclip-1.1.5.tgz"
@@ -7545,6 +7557,13 @@
     "big.js" "^5.2.2"
     "emojis-list" "^3.0.0"
     "json5" "^2.1.2"
+
+"localforage@^1.10.0":
+  "integrity" "sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg=="
+  "resolved" "https://registry.npmmirror.com/localforage/-/localforage-1.10.0.tgz"
+  "version" "1.10.0"
+  dependencies:
+    "lie" "3.1.1"
 
 "locate-path@^3.0.0":
   "integrity" "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A=="
@@ -11324,6 +11343,18 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
   "version" "3.4.0"
 
+"v-dropdown@^2.1.0":
+  "integrity" "sha512-Rc+LairgIJENvLQCBpl4QAcen8h0EIffKaLeb+W5G2dPrW8HbPLDqQhxKOdXPQB4dcCIePie/Os6TN4K5i0a0Q=="
+  "resolved" "https://registry.npmmirror.com/v-dropdown/-/v-dropdown-2.1.1.tgz"
+  "version" "2.1.1"
+
+"v-selectpage@^2.1.4":
+  "integrity" "sha512-053BnHFDpxcOEznRmoIdpJumolgAjJJXR6Bsd02ALI5NRDnpJUsSMRVdYx8ZVuAMNIsHmI/Xl4xRMFxQE0M34A=="
+  "resolved" "https://registry.npmmirror.com/v-selectpage/-/v-selectpage-2.1.4.tgz"
+  "version" "2.1.4"
+  dependencies:
+    "v-dropdown" "^2.1.0"
+
 "v8-compile-cache@^2.0.3":
   "integrity" "sha512-8OQ9CL+VWyt3JStj7HX7/ciTL2V3Rl1Wf5OL+SNTm0yK1KvtReVulksyeRnCANHHuUxHlQig+JJDlUhBt1NQDQ=="
   "resolved" "https://registry.npmjs.org/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz"
@@ -11501,6 +11532,13 @@
     "raw-loader" "^4.0.1"
     "vue-resize-sensor" "^2.0.0"
     "worker-loader" "^2.0.0"
+
+"vue-print-nb@^1.7.5":
+  "integrity" "sha512-iNbNyUVRWz0Ha1UTiCKxMPtHLUDGgNI8e8xmD3xqm9RlXIUeX9bT7DgNAfY8vPzqyFRHqGjxLI1rycKH366ziQ=="
+  "resolved" "https://registry.npmmirror.com/vue-print-nb/-/vue-print-nb-1.7.5.tgz"
+  "version" "1.7.5"
+  dependencies:
+    "vue" "^2.6.11"
 
 "vue-resize-sensor@^2.0.0":
   "integrity" "sha512-W+y2EAI/BxS4Vlcca9scQv8ifeBFck56DRtSwWJ2H4Cw1GLNUYxiZxUHHkuzuI5JPW/cYtL1bPO5xPyEXx4LmQ=="

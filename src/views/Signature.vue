@@ -3,7 +3,7 @@
     <div class="signatureEthnic">
       <span class="title">请点击签名</span>
       <div class="platte_part" @click="showSign = true">
-        <div class="palette">
+        <div class="palette" id="printTest" ref="printTest">
           <img class="rotate_img" v-if="signImg" :src="signImg" />
           <van-popup
             v-model="showSign"
@@ -71,7 +71,9 @@
       <p>添加电子签名，自动生成个人授权委托书</p>
     </div>
     <div class="button_large">
-      <van-button type="info" size="large" @click="onSubmit">确定</van-button>
+      <van-button type="info" size="large" @click="onSubmit" v-print="printObj"
+        >确定</van-button
+      >
     </div>
   </div>
 </template>
@@ -88,6 +90,27 @@ export default {
       signImg: "",
       showSign: false,
       lineColor: "#000000",
+
+      printObj: {
+        id: "printTest", //绑定打印区域的id
+        preview: false, // 开启打印预览,
+        previewTitle: "打印预览", // 打印预览标题
+        popTitle: "电子签名打印", //内容标签，可以设计页眉
+        //调用打印工具前的回调函数
+        beforeOpenCallback(vue) {
+          vue.printLoading = true;
+          console.log("打开之前");
+        },
+        //调用打印工具成功回调函数
+        openCallback(vue) {
+          vue.printLoading = false;
+          console.log("执行了打印");
+        },
+        //关闭打印机的回调
+        closeCallback(vue) {
+          console.log("关闭了打印工具");
+        },
+      },
     };
   },
   computed: {
