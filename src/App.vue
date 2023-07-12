@@ -139,26 +139,14 @@ export default {
   overflow-x: hidden;
   box-sizing: border-box;
   font-size: 30px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-overflow-scrolling: touch;
   text-align: center;
   color: #2c3e50;
   border: 5px dashed #db3737;
   min-height: 100vh;
   box-sizing: border-box;
-  ::v-deep .van-grid {
-    align-items: flex-start;
-    .van-grid-item__icon {
-      color: #ff5722;
-    }
-  }
-  ::v-deep .van-grid-item__content--center {
-    justify-content: flex-start;
-  }
-  img {
-    width: 200px;
+  ::v-deep .van-grid-item__text {
+    color: #db3737;
+    font-weight: 600;
   }
 }
 #nprogress .bar {

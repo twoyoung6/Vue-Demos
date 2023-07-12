@@ -33,7 +33,7 @@ export default {
     this.customScroll();
   },
   methods: {
-    customScroll(delay = 100) {
+    customScroll(delay = 5) {
       if (!this.$refs.demo) {
         throw new Error("选择器不存在");
       }

@@ -71,7 +71,7 @@
       <p>添加电子签名，自动生成个人授权委托书</p>
     </div>
     <div class="button_large">
-      <van-button type="info" size="large" @click="onSubmit" v-print="printObj"
+      <van-button size="mini" type="info" @click="onSubmit" v-print="printObj"
         >确定</van-button
       >
     </div>

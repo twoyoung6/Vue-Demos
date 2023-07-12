@@ -36,6 +36,22 @@ export default {
       jojo: "Hello，twoyoung!",
     };
   },
+  mounted() {
+    // 重写复制内容存入系统粘贴板
+    var wrap = document.querySelector(".docs");
+    wrap.oncopy = function (event) {
+      // 通过copy事件监听，阻止将选中内容复制到系统剪切板上
+      event.preventDefault();
+      // 获取选中内容对象
+      const selection = document.getSelection();
+      // selection对象重构了toSring()方法，获取selection对象的选中内容
+      var selectContent = selection.toString();
+      var dealContent =
+        selectContent + "\n\n转载请联系作者，内容地址：www.twoyoung.top";
+      // 把重写后的内容写入到剪贴板
+      event.clipboardData.setData("text/plain", dealContent);
+    };
+  },
   methods: {
     // 接收隔代组件（孙子组件）的事件传递
     receiveChange(val) {

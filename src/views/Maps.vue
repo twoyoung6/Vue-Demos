@@ -1,6 +1,7 @@
 <template>
   <div>
     <van-button
+      size="mini"
       icon="map-marked"
       round
       color="linear-gradient(to right, #8BC34A, #009688)"
@@ -8,7 +9,7 @@
     >
       使用其他导航
     </van-button>
-    <van-button @click="open">唤起小程序地图</van-button>
+    <van-button size="mini" @click="open">唤起小程序地图</van-button>
     <DestinationMap
       :show.sync="show"
       :dlat="dlat"

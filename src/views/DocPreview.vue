@@ -2,13 +2,18 @@
   <div class="preview">
     <h2>移动端 PDF/Word 文件预览</h2>
     <a :href="`http://view.xdocin.com/xdoc?_xdoc=${pdfUrl}`">
-      <van-button type="info" block>XDOC PDF预览</van-button>
+      <van-button size="mini" type="info" block>XDOC PDF预览</van-button>
     </a>
 
     <a :href="`http://view.xdocin.com/xdoc?_xdoc=${wordUrl}`">
-      <van-button type="danger" block>XDOC Word预览</van-button>
+      <van-button size="mini" type="danger" block>XDOC Word预览</van-button>
     </a>
-    <van-button type="warning" block @click="$router.push('/pdfview')">
+    <van-button
+      size="mini"
+      type="warning"
+      block
+      @click="$router.push('/pdfview')"
+    >
       vue-pdf 预览
     </van-button>
   </div>

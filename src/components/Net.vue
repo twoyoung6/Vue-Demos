@@ -1,7 +1,7 @@
 <template>
   <div class="statusImg">
     <img :src="icon" alt="500" />
-    <van-button plain size="small" @click="refresh">刷新重新加载</van-button>
+    <van-button size="mini" plain @click="refresh">刷新重新加载</van-button>
   </div>
 </template>
 

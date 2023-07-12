@@ -8,11 +8,17 @@
       <div class="content">
         <div class="text">{{ posterContent }}</div>
         <!-- 二维码 -->
-        <img class="qrcode" src="../assets/images/qrCode.png" />
+        <img class="qrcode" :src="qr" />
       </div>
     </div>
-    <van-button type="danger" class="share" @click="share">分享海报</van-button>
+    <van-button size="mini" type="danger" class="share" @click="share"
+      >分享海报</van-button
+    >
     <img class="posterImg" :src="posterImg" alt="" v-show="posterImg" />
+    <van-button size="mini" class="share" @click="scanQr"
+      >识别二维码</van-button
+    >
+    <div class="result" v-html="result"></div>
   </div>
 </template>
 
@@ -23,10 +29,34 @@ export default {
     return {
       posterContent: "扫码领福利", // 文案内容
       posterHtmlBg: require("../assets/images/poster.jpg"), // 背景图
+      qr: require("../assets/images/qrCode.png"), // 二维码
       posterImg: "", // 最终生成的海报图片
+      result: "",
     };
   },
   methods: {
+    // 浏览器提供了原生的API BarcodeDetector 来解析二维码
+    scanQr() {
+      if ("BarcodeDetector" in window) {
+        // 创建检测器
+        const barcodeDetector = new BarcodeDetector({
+          formats: ["qr_code"],
+        });
+        barcodeDetector
+          .detect(this.qr)
+          .then((barcodes) => {
+            console.log("barcodes", barcodes);
+            barcodes.forEach((barcode) => {
+              this.result = barcode.rawValue;
+            });
+          })
+          .catch((err) => {
+            this.result = `<span class="error">解析出错：${err}</span>`;
+          });
+      } else {
+        this.result = "当前浏览器不支持二维码识别";
+      }
+    },
     share() {
       // 生成海报
       const vm = this;
@@ -93,6 +123,9 @@ export default {
     height: 987px;
     object-fit: cover;
     border: none;
+  }
+  .result {
+    color: snow;
   }
 }
 </style>
