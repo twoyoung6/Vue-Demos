@@ -134,7 +134,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"  >
+:root {
+  --theme-color: #3577fe;
+  --padding-main: 15px;
+  --font-color: #fff;
+  --font-size: 20px;
+  --bg-color: #f43211;
+  --base-size: 2;
+}
 #app {
   overflow-x: hidden;
   box-sizing: border-box;
