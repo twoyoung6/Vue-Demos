@@ -11,6 +11,7 @@ Vue.use(PdfView)
 
 import Print from 'vue-print-nb'
 Vue.use(Print)
+import "./common/debug";
 Vue.use(Vant)
 
 new Vue({
